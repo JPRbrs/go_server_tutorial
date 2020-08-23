@@ -1,4 +1,4 @@
-package rss_example
+package main
 
 import (
 	"fmt"
@@ -8,9 +8,9 @@ import (
 
 var example_feed = "https://lapastillaroja.net/feed/"
 
-func GetFeed() Feed {
-	fmt.Println("fetching :" + example_feed)
-	feed, err := rss.Fetch("http://example.com/rss")
+func GetFeed() *rss.Feed {
+	fmt.Println("fetching:" + example_feed)
+	feed, err := rss.Fetch(example_feed)
 	if err != nil {
 		// handle error.
 		fmt.Println("error")

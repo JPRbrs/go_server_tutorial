@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"regexp"
 	"text/template"
@@ -90,10 +89,14 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 }
 
 func main() {
+	var feed = GetFeed()
+	for _, item := range feed.Items {
+		fmt.Println(item.Title)
+		fmt.Println(item.Link)
+	}
 
-	fmt.Println(GetFeed())
 	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// log.Fatal(http.ListenAndServe(":8080", nil))
 }
